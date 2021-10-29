@@ -33,13 +33,13 @@ function App() {
       setmode('dark');
       document.body.style.backgroundColor = '#042743';
       setAlert("Dark Mode Enabled." , "success");
-      document.title = "Dark Mode";
+      document.title = "Text Transformer | Dark Mode";
     }
     else{
       setmode('light');
       document.body.style.backgroundColor = 'white';
       setAlert("Light Mode Enabled." , "success");
-      document.title = "Light Mode"; 
+      document.title = "Text Transformer | Light Mode"; 
     }
   }
   return (
@@ -47,8 +47,8 @@ function App() {
 
     <Router>
 
-    <Navbar  title="Text Transformer" mode = {mode} toggleMode= {toggleMode}/> {/* Props Used*}
-    {/* <Navbar /> */}
+    <Navbar  title="Text Transformer" mode = {mode} toggleMode= {toggleMode}/> {/* Props Used*/}
+    {/* <Navbar />  */}
 
     <Alert alert = {alert}/>
 
@@ -56,16 +56,16 @@ function App() {
 
     <Switch>
       <Route exact path="/about">
-        <About />
+        <About mode = {mode}/>
       </Route>
       <Route exact path="/">
-        <TextForm setAlert = {setAlert} heading="Text to analyze : " mode={mode}/>
+        <TextForm setAlert = {setAlert} heading="Try Text Transformer : Word counter, Character counter, Remove extra spaces" mode={mode}/>
       </Route>
     </Switch>
 
       
     </div>
-    </Router>
+     </Router> 
     </>
   );
 }

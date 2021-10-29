@@ -33,6 +33,7 @@ export default function TextForm(props) {
         var text = document.getElementById('mytext');
         text.select();
         navigator.clipboard.writeText(text.value);
+        document.getSelection().removeAllRanges();
         props.setAlert("Text Copied ", "success")
     }
 
@@ -51,19 +52,19 @@ export default function TextForm(props) {
             <textarea className = "form-control" value={text} onChange={HandleonChange} style={{backgroundColor:props.mode === 'light' ? 'white' : '#1f5987', color:props.mode === 'light' ? 'black' : 'white'}} id="mytext" rows="5"></textarea>
             </div>
             <div className="flex">
-                <button className="btn btn-warning mx-2" onClick={HandleUpClick}>Convert To Uppercase</button>
-                <button className="btn btn-primary mx-2" onClick={HandleLowClick}>Convert To Lowercase</button>
-                <button className="btn btn-secondary mx-2" onClick={HandleClearClick}>Clear Text</button>
-                <button className="btn btn-info mx-2" onClick={HandleCopy}>Copy Text</button>
-                <button className="btn btn-dark mx-2" onClick={HandleExtraSpaces}>Remove Extra Spaces </button>
+                <button disabled = {text.length === 0} className="btn btn-warning mx-2 my-1" onClick={HandleUpClick}>Convert To Uppercase</button>
+                <button disabled = {text.length === 0} className="btn btn-primary mx-2 my-1" onClick={HandleLowClick}>Convert To Lowercase</button>
+                <button disabled = {text.length === 0} className="btn btn-secondary mx-2 my-1" onClick={HandleClearClick}>Clear Text</button>
+                <button disabled = {text.length === 0} className="btn btn-info mx-2 my-1" onClick={HandleCopy}>Copy Text</button>
+                <button disabled = {text.length === 0} className="btn btn-dark mx-2 my-1" onClick={HandleExtraSpaces}>Remove Extra Spaces </button>
             </div>
         </div>
         <div className="container my-4" style={{color:props.mode === 'light' ? 'black' : 'white'}}>
             <h2>Your Text Summery</h2>
-            <p>'{text.split(" ").length}' Words and '{text.length}' Characters</p>
-            <p>{0.008 * text.split(" ").length} Minutes to read</p>
+            <p>'{text.split(" ").filter((ele) => {return ele.length !== 0}).length}' Words and '{text.length}' Characters</p>
+            <p>{0.008 * text.split(" ").filter((ele) =>{return ele.length !==0}).length} Minutes to read</p>
             <h3>Preview</h3>
-            <p>{text.length>0 ? text : 'Enter something in textbox to preview it.'}</p>
+            <p>{text.length>0 ? text : 'Nothing to preview'}</p>
         </div>
         </>
     )
